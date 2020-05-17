@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\gramu\ProjetF - Git\.metadata\.plugins\org.eclipse.jdt.core
+2565760328.index
+3617446650.index
+383623771.index
