@@ -83,32 +83,51 @@ public class LinkDatabase {
 	
 	public  void ajouterEtudiants(Etudiants etudiant1)  {
 		
+
 		PreparedStatement ps = null; 
+		
 		try {
-			ps=db.getConnection().prepareStatement("INSERT INTO etudiants (id_etudiant, groupe, nom, prenom, birth_day, sexe, email,  addresse, ville, codePostal, pays, telefone) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-			  //// remplacer le premier ? qui est le id_etudiant	
-			    ps.setString(1,etudiant1.getid_etudiant());
-			 // remplacer le deuxieme ? qui est le groupe	
-			    ps.setString(2,etudiant1.getgroupe());
-			    ps.setString(3,etudiant1.getnom());
-				ps.setString(4,etudiant1.getprenom());
-				ps.setString(5,etudiant1.getbirth_day());
-				ps.setString(6,etudiant1.getsexe()); 
-				ps.setString(6,etudiant1.getsexe()); 
-				ps.setString(7,etudiant1.getemail());
-				ps.setString(8,etudiant1.getaddresse()); 
-			    ps.setString(9,etudiant1.getville());
-				ps.setString(10,etudiant1.getcodePostal()); 
-				ps.setString(11,etudiant1.getpays());
-				ps.setString(12,etudiant1.gettelefone());  
-				ps.executeUpdate();  
-				JOptionPane.showMessageDialog(null, "Etudiant Ajouter");
-				
-		          ps.close();   
-		 		
+			
+//			get one students by email to avoid repetition
+			Statement statement = db.getStatement();
+			String email = etudiant1.getemail() ;
+			String isTrue = "false";
+			// on execute la requete
+			ResultSet rs = statement.executeQuery("SELECT * FROM etudiants where email ='"+email+"'");
+			//on initialise la liste des etudiantes
+			ArrayList<Etudiants> liste = new ArrayList<Etudiants>();
+			//On remplit la liste des etudiantes
+			while(rs.next()){
+				isTrue = "true";
+			}
+			
+			if(isTrue != "true") {
+				ps=db.getConnection().prepareStatement("INSERT INTO etudiants ( groupe, nom, prenom, birth_day, sexe, email,  addresse, ville, codePostal, pays, telefone) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+				  //// remplacer le premier ? qui est le id_etudiant	
+//				    ps.setString(1,etudiant1.getid_etudiant());
+				 // remplacer le deuxieme ? qui est le groupe	
+				    ps.setString(1,etudiant1.getgroupe());
+				    ps.setString(2,etudiant1.getnom());
+					ps.setString(3,etudiant1.getprenom());
+					ps.setString(4,etudiant1.getbirth_day());
+					ps.setString(5,etudiant1.getsexe()); 
+//					ps.setString(6,etudiant1.getsexe()); 
+					ps.setString(6,etudiant1.getemail());
+					ps.setString(7,etudiant1.getaddresse()); 
+				    ps.setString(8,etudiant1.getville());
+					ps.setString(9,etudiant1.getcodePostal()); 
+					ps.setString(10,etudiant1.getpays());
+					ps.setString(11,etudiant1.gettelefone());  
+					ps.executeUpdate();  
+					JOptionPane.showMessageDialog(null, "Etudiant Ajouter");
+					
+			         ps.close();  
+			}else {
+				JOptionPane.showMessageDialog(null, "email exist");
+			}
 			
 		} catch (Exception ex) {
-			System.out.println("Ajout impossible à effectuer.\nErreur :" );
+			System.out.println("Ajout impossible ï¿½ effectuer.\nErreur :" );
 			ex.printStackTrace();}
 	
 	}
@@ -234,7 +253,7 @@ public class LinkDatabase {
 				 		
 				
 			} catch (Exception ex) {
-				System.out.println("Ajout impossible à effectuer.\nErreur :" );
+				System.out.println("Ajout impossible ï¿½ effectuer.\nErreur :" );
 				ex.printStackTrace();}
 			
 		}
@@ -266,7 +285,7 @@ public class LinkDatabase {
 				 		
 				
 			} catch (Exception ex) {
-				System.out.println("Modification impossible à effectuer.\nErreur :" );
+				System.out.println("Modification impossible ï¿½ effectuer.\nErreur :" );
 				ex.printStackTrace();}
 		     
 

@@ -17,7 +17,7 @@ public class Database {
 			//Les parametres de connexion a la BD 
 			String url = "jdbc:mysql://localhost/projet?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 			String username = "root";
-			String password = "Grc251089.";
+			String password = "yannick";
 
 			conn = DriverManager.getConnection(url, username, password);
 			stmt = conn.createStatement();
